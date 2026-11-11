@@ -6,6 +6,7 @@ import { useTime } from "./motion";
 import { Birth } from "./scenes/Birth";
 import { Features } from "./scenes/Features";
 import { Hook } from "./scenes/Hook";
+import { Numbers } from "./scenes/Numbers";
 import { Reveal } from "./scenes/Reveal";
 import { timeline, toFrames } from "./timeline";
 
@@ -16,6 +17,7 @@ const SCENES: Array<{ key: keyof typeof timeline.scenes; Component: React.FC }> 
   { key: "birth", Component: Birth },
   { key: "reveal", Component: Reveal },
   { key: "features", Component: Features },
+  { key: "numbers", Component: Numbers },
 ];
 
 export const Video: React.FC = () => {

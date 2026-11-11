@@ -16,12 +16,17 @@ const CY = 430;
 const ICON = 340;
 
 /** Soft rays of light turning slowly behind the icon. */
-const Rays: React.FC<{ t: number; x: number; opacity: number }> = ({ t, x, opacity }) => (
+export const Rays: React.FC<{ t: number; x: number; y?: number; opacity: number }> = ({
+  t,
+  x,
+  y = CY,
+  opacity,
+}) => (
   <div
     style={{
       position: "absolute",
       left: x - 1300,
-      top: CY - 1300,
+      top: y - 1300,
       width: 2600,
       height: 2600,
       opacity,
