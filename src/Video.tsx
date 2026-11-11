@@ -5,6 +5,7 @@ import { loadFonts } from "./fonts";
 import { useTime } from "./motion";
 import { Birth } from "./scenes/Birth";
 import { Hook } from "./scenes/Hook";
+import { Reveal } from "./scenes/Reveal";
 import { timeline, toFrames } from "./timeline";
 
 loadFonts();
@@ -12,6 +13,7 @@ loadFonts();
 const SCENES: Array<{ key: keyof typeof timeline.scenes; Component: React.FC }> = [
   { key: "hook", Component: Hook },
   { key: "birth", Component: Birth },
+  { key: "reveal", Component: Reveal },
 ];
 
 export const Video: React.FC = () => {
