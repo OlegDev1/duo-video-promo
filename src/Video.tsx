@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Sequence, useVideoConfig } from "remotion";
+import { AbsoluteFill, Audio, Sequence, staticFile, useVideoConfig } from "remotion";
 import { Grain } from "./components/Background";
 import { loadFonts } from "./fonts";
 import { useTime } from "./motion";
@@ -34,6 +34,8 @@ export const Video: React.FC = () => {
         );
       })}
       <Grain t={t} />
+      {/* Music and sound effects, synthesized by audio/synth.py from the same timeline. */}
+      <Audio src={staticFile("audio/soundtrack.wav")} />
     </AbsoluteFill>
   );
 };

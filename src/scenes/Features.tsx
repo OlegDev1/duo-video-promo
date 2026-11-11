@@ -400,8 +400,8 @@ const Data: React.FC<{ t: number }> = ({ t }) => {
           top: 356,
           display: "flex",
           justifyContent: "center",
-          gap: 44,
-          transform: "scale(1.07)",
+          gap: 40,
+          transform: "scale(1.02)",
           transformOrigin: "50% 0%",
         }}
       >
