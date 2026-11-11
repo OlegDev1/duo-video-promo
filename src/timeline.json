@@ -1,0 +1,60 @@
+{
+  "fps": 60,
+  "width": 1920,
+  "height": 1080,
+  "bpm": 120,
+  "scenes": {
+    "hook": { "start": 0, "end": 6 },
+    "birth": { "start": 6, "end": 16 },
+    "reveal": { "start": 16, "end": 22 },
+    "features": { "start": 22, "end": 34 },
+    "numbers": { "start": 34, "end": 44 }
+  },
+  "hook": {
+    "line1": 0.1,
+    "line2": 1.5,
+    "line3": 3.0,
+    "line4": 4.5,
+    "out": 5.55
+  },
+  "birth": {
+    "task": 0.1,
+    "typeStart": 0.35,
+    "typeEnd": 1.25,
+    "coordinator": 1.5,
+    "developer": 2.5,
+    "testers": [3.5, 3.75, 4.0, 4.25, 4.5, 4.75, 5.0],
+    "wholeApp": 5.5,
+    "deploy": 6.5,
+    "deployOk": 7.5,
+    "finalTest": 8.0,
+    "finalOk": 9.0,
+    "converge": 9.25,
+    "flash": 9.75
+  },
+  "reveal": {
+    "icon": 0.0,
+    "sweep": 1.0,
+    "wordmark": 2.0,
+    "tagline": 3.0,
+    "out": 5.5
+  },
+  "features": {
+    "chats": 0.0,
+    "chatItems": [0.75, 1.0, 1.25, 1.5, 1.75],
+    "data": 4.0,
+    "dataItems": [4.75, 5.25, 5.75],
+    "crypto": 8.0,
+    "scramble": 9.0,
+    "lock": 10.0,
+    "out": 11.6
+  },
+  "numbers": {
+    "stats": [0.25, 1.0, 1.75],
+    "compare": 3.0,
+    "compareHit": 4.0,
+    "logo": 6.25,
+    "tagline": 7.25,
+    "fade": 9.2
+  }
+}

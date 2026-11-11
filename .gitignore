@@ -1,0 +1,7 @@
+node_modules/
+out/*
+!out/.gitkeep
+.DS_Store
+*.log
+audio/__pycache__/
+audio/stems/
