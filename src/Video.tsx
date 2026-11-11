@@ -4,6 +4,7 @@ import { Grain } from "./components/Background";
 import { loadFonts } from "./fonts";
 import { useTime } from "./motion";
 import { Birth } from "./scenes/Birth";
+import { Features } from "./scenes/Features";
 import { Hook } from "./scenes/Hook";
 import { Reveal } from "./scenes/Reveal";
 import { timeline, toFrames } from "./timeline";
@@ -14,6 +15,7 @@ const SCENES: Array<{ key: keyof typeof timeline.scenes; Component: React.FC }> 
   { key: "hook", Component: Hook },
   { key: "birth", Component: Birth },
   { key: "reveal", Component: Reveal },
+  { key: "features", Component: Features },
 ];
 
 export const Video: React.FC = () => {

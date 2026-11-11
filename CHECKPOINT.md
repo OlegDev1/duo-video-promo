@@ -82,7 +82,7 @@ Numbers:
 | 3 | Scene 1: Hook | done |
 | 4 | Scene 2: Birth of Duo | done |
 | 5 | Scene 3: Duo appears | done |
-| 6 | Scene 4: Features | todo |
+| 6 | Scene 4: Features | done |
 | 7 | Scene 5: Numbers and ending | todo |
 | 8 | Audio: music + SFX synthesized and synced | todo |
 | 9 | Full render to `out/`, checks, README, final push | todo |
