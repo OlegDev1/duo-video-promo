@@ -45,11 +45,13 @@ const Beat: React.FC<{
   end: number;
   children: React.ReactNode;
   style?: React.CSSProperties;
-}> = ({ t, start, end, children, style }) => {
+  /** Length of the exit in seconds. */
+  exit?: number;
+}> = ({ t, start, end, children, style, exit = 0.2 }) => {
   if (t < start - 0.05 || t > end + 0.05) return null;
-  const out = tween(t, end - 0.2, 0.2, ease.in);
+  const out = tween(t, end - exit, exit, ease.in);
   const drift = clamp01((t - start) / (end - start));
-  const scale = lerp(1, 1.05, drift) * lerp(1, 1.5, out);
+  const scale = lerp(1, 1.05, drift) * lerp(1, 1.6, out);
   return (
     <AbsoluteFill
       style={{
@@ -105,13 +107,13 @@ const Topics: React.FC<{ t: number }> = ({ t }) => {
         const pop = springAt(t, at, springs.pop);
         const float = Math.sin(t * 1.6 + i * 1.7) * 8 * (1 - jam);
         // Crammed position: all words pile up inside one narrow bar.
-        const jx = (rand(i + 20) - 0.5) * 760;
+        const jx = ((((i * 3) % TOPICS.length) + 0.5) / TOPICS.length - 0.5) * 700;
         const jy = 150 + (rand(i + 40) - 0.5) * 20;
         const shake = jam > 0.95 ? Math.sin(t * 38 + i * 2.1) * 2.5 : 0;
         const x = lerp(w.x, jx, jam) + shake;
         const y = lerp(w.y + float, jy, jam);
-        const depth = 0.75 + rand(i + 9) * 0.5;
-        const scale = lerp(pop * depth, 0.56, jam);
+        const depth = 0.95 + rand(i + 9) * 0.55;
+        const scale = lerp(pop * depth, 0.74, jam);
         return (
           <span
             key={i}
@@ -121,9 +123,9 @@ const Topics: React.FC<{ t: number }> = ({ t }) => {
               fontSize: w.size,
               lineHeight: 1,
               color: TOPIC_COLORS[w.hue],
-              opacity: Math.min(1, pop * 1.4) * lerp(depth > 1 ? 0.95 : 0.7, 0.92, jam),
+              opacity: Math.min(1, pop * 1.4) * lerp(depth > 1.15 ? 1 : 0.8, 0.95, jam),
               transform: `translate(${x}px, ${y}px) rotate(${lerp(w.rot, (rand(i + 60) - 0.5) * 26, jam)}deg) scale(${scale})`,
-              filter: `blur(${lerp(depth < 0.95 ? 2.5 : 0, 0, jam)}px)`,
+              filter: `blur(${lerp(depth < 1.1 ? 2 : 0, 0, jam)}px)`,
               textShadow: "0 0 30px rgba(120,150,255,0.35)",
               whiteSpace: "nowrap",
             }}
@@ -145,6 +147,16 @@ export const Hook: React.FC = () => {
     <AbsoluteFill>
       <DarkBackground t={t} energy={0.1 + push * 0.15} />
       <Bokeh t={t} mode="dark" count={26} seed={3} push={push * 0.8 + leave * 2} />
+
+      {/* A slow streak of light behind the type gives the dark some air. */}
+      <AbsoluteFill
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 16% at 50% 50%, rgba(140,170,255,0.2) 0%, rgba(140,170,255,0) 70%)",
+          transform: `translateX(${Math.sin(t * 0.9) * 120}px) rotate(-8deg) scale(${1.1 + push * 0.3})`,
+          opacity: 1 - leave,
+        }}
+      />
 
       <AbsoluteFill style={{ transform: `scale(${1 + push * 0.04})` }}>
         {/* 1. One person. */}
@@ -181,8 +193,6 @@ export const Hook: React.FC = () => {
             </W>
           </div>
         </Beat>
-        <Topics t={t} />
-
         {/* 3. And only one chat: the topics are crammed into a single bar. */}
         <Beat t={t} start={C.line3} end={C.line4}>
           <div style={{ ...display(160, 680), ...headline, transform: "translateY(-120px)" }}>
@@ -220,8 +230,10 @@ export const Hook: React.FC = () => {
           </div>
         </Beat>
 
+        <Topics t={t} />
+
         {/* 4. The point: other messengers and email give you no second chat. */}
-        <Beat t={t} start={C.line4} end={DURATION + 1}>
+        <Beat t={t} start={C.line4} end={DURATION + 0.02} exit={DURATION - C.out}>
           <div style={{ textAlign: "center" }}>
             <div
               style={{
@@ -238,7 +250,7 @@ export const Hook: React.FC = () => {
                 и почте
               </W>
             </div>
-            <div style={{ ...display(132, 680), ...headline }}>
+            <div style={{ ...display(118, 680), ...headline }}>
               <W t={t} at={C.line4 + 0.16}>
                 второй чат
               </W>{" "}
@@ -250,8 +262,8 @@ export const Hook: React.FC = () => {
                 <HandStroke
                   d={strokes.underline}
                   viewBox="0 0 600 60"
-                  width={700}
-                  height={70}
+                  width={620}
+                  height={62}
                   progress={tween(t, C.line4 + 0.6, 0.4, ease.inOut)}
                   color={color.coral}
                   strokeWidth={9}
@@ -264,8 +276,6 @@ export const Hook: React.FC = () => {
         </Beat>
       </AbsoluteFill>
 
-      {/* Leave: the type falls away as the camera pushes into the dark. */}
-      <AbsoluteFill style={{ background: "#05060b", opacity: leave * 0.0 }} />
     </AbsoluteFill>
   );
 };

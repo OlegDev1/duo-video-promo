@@ -79,7 +79,7 @@ Numbers:
 | --- | --- | --- |
 | 1 | Facts + CHECKPOINT.md | done |
 | 2 | Setup: Remotion, fonts, timeline, motion system, shared components | done |
-| 3 | Scene 1: Hook | todo |
+| 3 | Scene 1: Hook | done |
 | 4 | Scene 2: Birth of Duo | todo |
 | 5 | Scene 3: Duo appears | todo |
 | 6 | Scene 4: Features | todo |
