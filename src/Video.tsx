@@ -3,6 +3,7 @@ import { AbsoluteFill, Sequence, useVideoConfig } from "remotion";
 import { Grain } from "./components/Background";
 import { loadFonts } from "./fonts";
 import { useTime } from "./motion";
+import { Birth } from "./scenes/Birth";
 import { Hook } from "./scenes/Hook";
 import { timeline, toFrames } from "./timeline";
 
@@ -10,6 +11,7 @@ loadFonts();
 
 const SCENES: Array<{ key: keyof typeof timeline.scenes; Component: React.FC }> = [
   { key: "hook", Component: Hook },
+  { key: "birth", Component: Birth },
 ];
 
 export const Video: React.FC = () => {
