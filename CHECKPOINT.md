@@ -71,7 +71,7 @@ Numbers:
 | 2 Birth | 6 | 16 |
 | 3 Reveal | 16 | 22 |
 | 4 Features | 22 | 34 |
-| 5 Numbers + ending | 34 | 44 |
+| 5 Numbers + ending | 34 | 44 (logo at 40) |
 
 ## Steps
 
@@ -84,14 +84,33 @@ Numbers:
 | 5 | Scene 3: Duo appears | done |
 | 6 | Scene 4: Features | done |
 | 7 | Scene 5: Numbers and ending | done |
-| 8 | Audio: music + SFX synthesized and synced | todo |
-| 9 | Full render to `out/`, checks, README, final push | todo |
+| 8 | Audio: music + SFX synthesized and synced | done |
+| 9 | Full render to `out/`, checks, README, final push | done |
+
+## Result
+
+`out/duo-promo.mp4`: 44.0 s, 1920×1080, 60 fps, H.264 + AAC 320 kb/s, 38.5 MB.
+Checked after the render: 2640 frames, audio in the file is sample-aligned with
+`public/audio/soundtrack.wav`, frames from every scene look right, no banding
+in the dark gradients.
+
+Open points for the owner:
+- Development time is shown as 3.5 hours (what the repo supports), not 2–3.
+- Agents are shown as 9 (sessions that left commits). If the coordinator and the
+  final tester were separate sessions, the real number is 11.
+Both are constants at the top of `src/scenes/Numbers.tsx`.
 
 ## Notes for resuming
 
 - Preview frames: `scripts/look.sh <cols> <scale> <seconds...>` renders stills and
   tiles them into `out/sheet.jpg` (bundles once, about 0.5 s per frame).
 - Chrome is at `/usr/bin/google-chrome`; renders need `--browser-executable` (see README).
+- Full render: `npx remotion render DuoPromo out/duo-promo.mp4 --browser-executable=/usr/bin/google-chrome --concurrency=2`
+  takes about 20 minutes here, so run it in the background and poll `out/render.log`.
+- Audio: `python3 audio/synth.py` writes `public/audio/soundtrack.wav` (about -15 LUFS,
+  peak -1.5 dBFS). `STATS=1` prints the level of every bus per scene.
+- Scene copy (Russian) lives in the scene files; the numbers of the last scene are
+  constants at the top of `src/scenes/Numbers.tsx`.
 - Scenes are registered in `src/Video.tsx` (`SCENES` array). Cue times for every
   scene are in `src/timeline.json`, in seconds, local to the scene.
 - The dark look (scenes 1–2) and light look (scenes 3–5) are `DarkBackground` and
